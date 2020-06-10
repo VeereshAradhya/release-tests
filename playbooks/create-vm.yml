@@ -1,0 +1,22 @@
+---
+- name: launch a instance
+  hosts: localhost
+  tasks:
+    - name: launch an instance
+      os_server:
+        state: present
+        auth:
+          auth_url: "{{ lookup('env','OS_AUTH_URL') }}"
+          username: "{{ lookup('env','OS_USERNAME') }}"
+          password: "{{ lookup('env','OS_PASSWORD') }}"
+          project_name: "{{ lookup('env','OS_PROJECT_NAME') }}"
+        name: "{{ lookup('env','VM_NAME') }}"
+        image: dea31443-5c67-4794-a924-54e144f767cb
+        key_name: pipelines-shared
+        timeout: 600
+        flavor: a9acc2de-39d7-4148-8d16-413c3b696e9d
+        security_groups: 
+          - ssh
+          - default
+        auto_ip: yes
+        network: provider_net_cci_6
