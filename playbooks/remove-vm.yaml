@@ -1,0 +1,13 @@
+---
+- name: Delete instance
+  hosts: localhost
+  tasks:
+    - name: Delete instance
+      os_server:
+        auth:
+          auth_url: "{{ lookup('env','OS_AUTH_URL') }}"
+          username: "{{ lookup('env','OS_USERNAME') }}"
+          password: "{{ lookup('env','OS_PASSWORD') }}"
+          project_name: "{{ lookup('env','OS_PROJECT_NAME') }}"
+        name: "{{ lookup('env','VM_NAME') }}"
+        state: absent
