@@ -12,7 +12,7 @@
           project_name: "{{ lookup('env','OS_PROJECT_NAME') }}"
         name: "{{ lookup('env','VM_NAME') }}"
         image: dea31443-5c67-4794-a924-54e144f767cb
-        key_name: pipelines-shared
+        key_name: pipelines-ci
         timeout: 600
         flavor: a9acc2de-39d7-4148-8d16-413c3b696e9d
         security_groups: 
