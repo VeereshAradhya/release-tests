@@ -16,7 +16,7 @@ with open('hosts', 'w') as f:
 	f.write("[test-host]\n{}".format(ip))
 
 #Build ansible.cfg
-os_username = { "ubuntu": "ubuntu", "rhel": "cloud_user"}
+os_username = { "ubuntu": "ubuntu", "rhel": "cloud-user"}
 
 config = '''[defaults]
 remote_user={}
