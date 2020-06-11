@@ -1,0 +1,14 @@
+---
+- name: generate keypair
+  hosts: localhost
+  tasks:
+    - name: generate keypair
+      os_keypair:
+        state: present
+        auth:
+          auth_url: "{{ lookup('env','OS_AUTH_URL') }}"
+          username: "{{ lookup('env','OS_USERNAME') }}"
+          password: "{{ lookup('env','OS_PASSWORD') }}"
+          project_name: "{{ lookup('env','OS_PROJECT_NAME') }}"
+        name: "{{ lookup('env','KEYPAIR_NAME') }}"
+        public_key_file: /home/varadhya/test-key/cloud.key.pub
