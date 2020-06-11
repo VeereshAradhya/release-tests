@@ -11,4 +11,4 @@
           password: "{{ lookup('env','OS_PASSWORD') }}"
           project_name: "{{ lookup('env','OS_PROJECT_NAME') }}"
         name: "{{ lookup('env','KEYPAIR_NAME') }}"
-        public_key_file: /home/varadhya/test-key/cloud.key.pub
+        public_key_file: /tekton/home/release-tests/playbooks/cloud.key.pub
