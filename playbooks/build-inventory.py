@@ -20,6 +20,7 @@ os_username = { "ubuntu": "ubuntu", "rhel": "cloud_user"}
 
 config = '''[defaults]
 remote_user={}
-inventory=hosts'''.format(os_username[host_type])
+inventory=hosts
+host_key_checking=False'''.format(os_username[host_type])
 with open('ansible.cfg', 'w') as f:
 	f.write(config)
