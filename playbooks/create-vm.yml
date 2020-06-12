@@ -11,7 +11,7 @@
           password: "{{ lookup('env','OS_PASSWORD') }}"
           project_name: "{{ lookup('env','OS_PROJECT_NAME') }}"
         name: "{{ lookup('env','VM_NAME') }}"
-        image: 63fc42cc-87db-4e4b-bf2c-cb05767b0d34
+        image: faa05789-ba1b-499c-b91f-54f6d291c488
         key_name: "{{ lookup('env','KEYPAIR_NAME') }}"
         timeout: 600
         flavor: a9acc2de-39d7-4148-8d16-413c3b696e9d
