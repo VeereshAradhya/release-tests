@@ -1,0 +1,10 @@
+---
+- name: Install tkn cli on RHEL
+  hosts: test-host
+  tasks:
+    - name: Install tkn cli on RHEL using yum
+      yum:
+        name: openshift-pipelines-client-0.9.0-2.el8.x86_64
+        state: present
+      become: yes
+      become_method: sudo
