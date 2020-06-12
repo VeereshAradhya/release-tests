@@ -1,6 +1,6 @@
 ---
 - name: Run release test on RHEL vm
-  hosts: rhel
+  hosts: test-host
   tasks:
     - name: clone the release tests repository
       git:
