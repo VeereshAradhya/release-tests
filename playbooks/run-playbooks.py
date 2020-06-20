@@ -42,7 +42,7 @@ os.environ["FLAVOR_ID"] = flavor_image_combination[os_type]['flavor']
 
 
 # Generate new Keypair
-print('******************************** Generating keypair {} *************************************'.format(keypair_name))
+print('******************************** Generating keypair {} *************************************'.format(keypair_name), flush=True)
 output = subprocess.run('openstack keypair create {}'.format(keypair_name).split(), stdout=subprocess.PIPE, text=True)
 
 # Checking if keypair got generated or not
@@ -51,15 +51,15 @@ if output.returncode != 0:
 
 with open('id_rsa', 'w') as f:
 	f.write(output.stdout)
-print('******************************** Generated keypair {} successfully *************************************'.format(keypair_name))
+print('******************************** Generated keypair {} successfully *************************************'.format(keypair_name), flush=True)
 
 
 # Create VM
-print('******************************** Creating {} VM with name {}*************************************'.format(os_type, vm_name))
+print('******************************** Creating {} VM with name {}*************************************'.format(os_type, vm_name), flush=True)
 output = subprocess.run('ansible-playbook create-vm.yml -vvvv'.split(), stdout=subprocess.PIPE, text=True)
 
 if output.returncode != 0:
-	print('******************************** Deleting keypair {}*************************************'.format(keypair_name))
+	print('******************************** Deleting keypair {}*************************************'.format(keypair_name), flush=True)
 	subprocess.run('openstack keypair delete {}'.format(keypair_name).split(), stdout=subprocess.PIPE, text=True)
 	raise Exception('Creation of VM failed with error {}'.format(output.stderr))
 
@@ -104,17 +104,17 @@ with open('hosts', 'w') as f:
 	f.write(inventory_content)
 
 print('sleeping for 1 minute')
-time.sleep(60)
+time.sleep(120)
 
 
 # Install tkn on remote machine
-print('******************************** Install tkn on machine {} *************************************'.format(vm_name))
-output = subprocess.run('ansible-playbook install-tkn-{}.yml -v -i hosts'.format(os_type).split(), stdout=subprocess.PIPE, text=True)
-print('installation tkn')
+print('******************************** Install tkn on machine {} *************************************'.format(vm_name), flush=True)
+output = subprocess.run('ansible-playbook install-tkn-{}.yml -v -i hosts --private-key id_rsa'.format(os_type).split(), stdout=subprocess.PIPE, text=True)
+print('installation tkn', flush=True)
 print(output)
 
 if output.returncode == 0:
-	print('******************************** running cli tests on  {} *************************************'.format(vm_name))
+	print('******************************** running cli tests on  {} *************************************'.format(vm_name), flush=True)
 	output = subprocess.run('ansible-playbook run-cli-tests-{}.yml -v -i hosts'.format(os_type).split(), stdout=subprocess.PIPE, text=True)
 	print(output.stdout)
 	print('new line')
