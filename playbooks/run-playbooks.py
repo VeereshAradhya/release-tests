@@ -53,6 +53,11 @@ with open('id_rsa', 'w') as f:
 	f.write(output.stdout)
 print('******************************** Generated keypair {} successfully *************************************'.format(keypair_name), flush=True)
 
+# Reduce permission to id_rsa
+output = subprocess.run('chmod 400 id_rsa'.split(), stdout=subprocess.PIPE, text=True)
+
+
+
 
 # Create VM
 print('******************************** Creating {} VM with name {}*************************************'.format(os_type, vm_name), flush=True)
