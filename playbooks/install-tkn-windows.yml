@@ -1,0 +1,19 @@
+---
+- name: download the tkn file to local
+  hosts: localhost
+  tasks:
+    - name: Download tkn cli zip file locally
+      get_url:
+        url: https://github.com/tektoncd/cli/releases/download/v0.10.0/tkn_0.10.0_Windows_x86_64.zip
+        dest: ./
+- name: Install tkn cli on Windows
+  hosts: test-host
+  tasks:
+    - name: move the cli zip to windows machine
+      win_copy:
+        src: tkn_0.10.0_Windows_x86_64.zip
+        dest: C:\Users\Admin\Downloads\tkn_0.10.0_Windows_x86_64.zip
+    - name: unzip the downloaded cli to path
+      win_unzip:
+        src: C:\Users\Admin\Downloads\tkn_0.10.0_Windows_x86_64.zip
+        dest: C:\Program Files (x86)\tekton

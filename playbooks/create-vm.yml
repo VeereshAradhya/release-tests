@@ -11,12 +11,13 @@
           password: "{{ lookup('env','OS_PASSWORD') }}"
           project_name: "{{ lookup('env','OS_PROJECT_NAME') }}"
         name: "{{ lookup('env','VM_NAME') }}"
-        image: 52a1a959-efd4-45aa-9c5c-854d3114b725
+        image: "{{ lookup('env','IMAGE_ID') }}"
         key_name: "{{ lookup('env','KEYPAIR_NAME') }}"
-        timeout: 600
-        flavor: a9acc2de-39d7-4148-8d16-413c3b696e9d
+        timeout: 1000
+        flavor: "{{ lookup('env','FLAVOR_ID') }}"
         security_groups: 
           - ssh
           - default
+          - allow_RDP
         auto_ip: yes
         network: provider_net_cci_6

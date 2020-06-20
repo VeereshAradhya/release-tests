@@ -1,0 +1,12 @@
+---
+- name: Run release test on RHEL vm
+  hosts: test-host
+  tasks:
+    - name: clone the release tests repository
+      win_shell: |
+        cd C:\Users\Admin\workspace
+        git config --global http.sslVerify "false"
+        git clone https://github.com/VeereshAradhya/release-tests.git
+        cd release-tests
+        git checkout poc-demo
+        auge run --env "test" --log-level=debug --verbose specs/cli/pipelines-e2e.spec
