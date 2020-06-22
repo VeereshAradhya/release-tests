@@ -69,6 +69,9 @@ if output.returncode != 0:
 	subprocess.run('openstack keypair delete {}'.format(keypair_name).split(), stdout=subprocess.PIPE, text=True)
 	raise Exception('Creation of VM failed with error {}'.format(output.stderr))
 
+print('sleeping for 2 minute')
+time.sleep(120)
+
 
 output = subprocess.run('openstack server list --name {} -f json'.format(vm_name).split(), stdout=subprocess.PIPE, text=True)
 vm_info = eval(output.stdout)[0]
@@ -85,6 +88,7 @@ os_username = { 'ubuntu': 'ubuntu', 'rhel': 'cloud-user', 'windows': "Admin"}
 
 if os_type == 'windows':
 	output = subprocess.run('nova get-password {} id_rsa'.format(vm_id).split(), stdout=subprocess.PIPE, text=True)
+	print(output)
 	win_password = output.stdout
 
 	inventory_content = '''
@@ -108,10 +112,6 @@ ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 '''.format(vm_ip, os_username[os_type])
 with open('hosts', 'w') as f:
 	f.write(inventory_content)
-
-print('sleeping for 2 minute')
-time.sleep(120)
-
 
 # Install tkn on remote machine
 print('******************************** Install tkn on machine {} *************************************'.format(vm_name), flush=True)
