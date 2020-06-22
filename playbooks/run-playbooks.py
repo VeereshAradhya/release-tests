@@ -88,7 +88,6 @@ os_username = { 'ubuntu': 'ubuntu', 'rhel': 'cloud-user', 'windows': "Admin"}
 
 if os_type == 'windows':
 	output = subprocess.run('nova get-password {} id_rsa'.format(vm_id).split(), stdout=subprocess.PIPE, text=True)
-	print(output)
 	win_password = output.stdout
 
 	inventory_content = '''

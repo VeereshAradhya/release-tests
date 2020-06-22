@@ -7,6 +7,10 @@
         repo: https://github.com/VeereshAradhya/release-tests.git
         dest: /home/cloud-user/workspace/release-tests
         version: poc-demo
+    - name: login to openshift cluster
+      shell:
+        cmd: oc login -u kubeadmin -p {{ lookup('env','OC_PASSWORD') }} {{ lookup('env','OC_SERVER') }} --insecure-skip-tls-verify=false
+        chdir: /home/cloud-user/workspace/release-tests
     - name: run cli tests
       shell:
         cmd: gauge run --env "test" --log-level=debug --verbose specs/cli/pipelines-e2e.spec
