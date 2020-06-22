@@ -117,6 +117,7 @@ time.sleep(120)
 print('******************************** Install tkn on machine {} *************************************'.format(vm_name), flush=True)
 output = subprocess.run('ansible-playbook install-tkn-{}.yml -v -i hosts --private-key id_rsa'.format(os_type).split(), stdout=subprocess.PIPE, text=True)
 print('installation tkn was successful', flush=True)
+print(output.stdout)
 
 if output.returncode == 0:
 	print('******************************** running cli tests on  {} *************************************'.format(vm_name), flush=True)
