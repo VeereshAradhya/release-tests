@@ -6,6 +6,7 @@ import string
 import random
 import subprocess
 import json
+import codecs
 
 os_type = sys.argv[1]
 
@@ -22,7 +23,7 @@ flavor_image_combination = {
 	},
 	"rhel": {
 		"flavor": "a9acc2de-39d7-4148-8d16-413c3b696e9d",
-		"image": "52a1a959-efd4-45aa-9c5c-854d3114b725"
+		"image": "9d6cb476-c374-4daf-bceb-f0a1e6ae0cfc"
 	}
 }
 rand_string = ''.join(random.choices(string.ascii_lowercase +
@@ -108,22 +109,24 @@ ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 with open('hosts', 'w') as f:
 	f.write(inventory_content)
 
-print('sleeping for 1 minute')
+print('sleeping for 2 minute')
 time.sleep(120)
 
 
 # Install tkn on remote machine
 print('******************************** Install tkn on machine {} *************************************'.format(vm_name), flush=True)
 output = subprocess.run('ansible-playbook install-tkn-{}.yml -v -i hosts --private-key id_rsa'.format(os_type).split(), stdout=subprocess.PIPE, text=True)
-print('installation tkn', flush=True)
-print(output)
+print('installation tkn was successful', flush=True)
 
 if output.returncode == 0:
 	print('******************************** running cli tests on  {} *************************************'.format(vm_name), flush=True)
-	output = subprocess.run('ansible-playbook run-cli-tests-{}.yml -v -i hosts'.format(os_type).split(), stdout=subprocess.PIPE, text=True)
-	print(output.stdout)
-	print('new line')
-
+	output = subprocess.run('ansible-playbook run-cli-tests-{}.yml -i hosts'.format(os_type).split(), stdout=subprocess.PIPE, text=True)
+	match = re.search(r'"msg": "(- gauge run .*)"', output.stdout)
+	output = match.group(1)
+	output = output.split("\\n")
+	for i in output:
+		i = i.strip('-')
+		print(codecs.getdecoder("unicode_escape")(i)[0])
 
 # Delete created VM
 print('******************************** Delete created VM {} *************************************'.format(vm_name))
@@ -133,22 +136,3 @@ output = subprocess.run('nova delete {}'.format(vm_id).split(), stdout=subproces
 # Delete keypair
 print('******************************** Delete Keypair {} *************************************'.format(keypair_name))
 output = subprocess.run('openstack keypair delete {}'.format(keypair_name).split(), stdout=subprocess.PIPE, text=True)
-
-
-# output = subprocess.run('ansible test-host -m ping'.split(), stdout=subprocess.PIPE, text=True)
-
-
-
-
-
-# if host_type != "windows":
-# 	print("*****************Generate Keypair to create VM********************")
-# 	stream = os.popen("ansible-playbook generate-keypair.yml -v")
-# 	output = stream.read()
-
-# match = re.search(r"failed=1", output)
-
-# if match:
-# 	failed_output = re.search(r"TASK(\s.*)", output)
-# 	print(output)
-# 	print(failed_output.group())
