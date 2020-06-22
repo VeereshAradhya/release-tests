@@ -9,4 +9,8 @@
         git clone https://github.com/VeereshAradhya/release-tests.git
         cd release-tests
         git checkout poc-demo
-        auge run --env "test" --log-level=debug --verbose specs/cli/pipelines-e2e.spec
+        gauge run --env "test" --log-level=debug --verbose specs/cli/pipelines-e2e.spec
+      register: output
+      ignore_errors: True
+    - debug:
+        msg: "{{ output.stdout_lines | to_nice_yaml}}"

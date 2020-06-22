@@ -19,7 +19,7 @@ if os_type not in expected_os:
 flavor_image_combination = {
 	"windows": {
 		"flavor": "f47e69d4-edd4-4da0-b4cc-aff9febfb289",
-		"image" : "92d3214d-41ec-4a2f-b018-f8786dd3534b"
+		"image" : "d6b1fad4-f7ee-452b-9813-c43e76592d9b"
 	},
 	"rhel": {
 		"flavor": "a9acc2de-39d7-4148-8d16-413c3b696e9d",
@@ -121,7 +121,7 @@ print('installation tkn was successful', flush=True)
 if output.returncode == 0:
 	print('******************************** running cli tests on  {} *************************************'.format(vm_name), flush=True)
 	output = subprocess.run('ansible-playbook run-cli-tests-{}.yml -i hosts'.format(os_type).split(), stdout=subprocess.PIPE, text=True)
-	match = re.search(r'"msg": "(- gauge run .*)"', output.stdout)
+	match = re.search(r'"msg": "(.*)"', output.stdout)
 	output = match.group(1)
 	output = output.split("\\n")
 	for i in output:
