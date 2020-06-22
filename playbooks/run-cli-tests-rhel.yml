@@ -9,7 +9,7 @@
         version: poc-demo
     - name: login to openshift cluster
       shell:
-        cmd: oc login -u kubeadmin -p {{ lookup('env','OC_PASSWORD') }} {{ lookup('env','OC_SERVER') }} --insecure-skip-tls-verify=false
+        cmd: oc login -u kubeadmin -p {{ lookup('env','OC_PASSWORD') }} {{ lookup('env','OC_SERVER') }} --insecure-skip-tls-verify=true
         chdir: /home/cloud-user/workspace/release-tests
     - name: run cli tests
       shell:
