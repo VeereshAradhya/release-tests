@@ -3,7 +3,7 @@
 Pre condition:
   * Validate Operator should be installed
 
-## Run sample pipeline
+## Run sample pipeline: P-01-TC01
 Tags: e2e, integration, pipelines
 
 Run a sample pipeline that has 2 tasks:
