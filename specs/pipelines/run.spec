@@ -4,7 +4,14 @@ Pre condition:
   * Validate Operator should be installed
 
 ## Run sample pipeline: P-01-TC01
-Tags: e2e, integration, pipelines
+Tags: e2e, integration, pipelines, test
+Automation: automated
+Component: comp2
+CasePositiveOrNegative: positive
+Level: Integration
+Type: Functional
+Importance: Critical
+CustomerScenario: no
 
 Run a sample pipeline that has 2 tasks:
   1. create a file
