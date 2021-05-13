@@ -64,7 +64,7 @@ def create_or_update_test(test_case):
     if test_id:
         test_properties = {}
         test_id = test_id.groups()[0]
-        print('Found test case {}'.format(test_case))
+        # print('Found test case {}'.format(test_case))
         test_title = test_title.replace(': ' + test_id, '')
 
         # Extract test case properties
