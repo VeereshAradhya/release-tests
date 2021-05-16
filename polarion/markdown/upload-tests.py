@@ -5,6 +5,10 @@ from pylero.exceptions import PyleroLibException
 import argparse
 import mistune
 import yaml
+import ssl
+
+# fix to certificate issue
+ssl._create_default_https_context = ssl._create_unverified_context
 
 # project id = VAradhyaExerciseAug30
 # Testcase = P-01-TC02
