@@ -4,9 +4,8 @@ Pre condition:
   * Validate Operator should be installed
 
 ## Run sample pipeline: P-01-TC01
-Tags: e2e, integration, pipelines, test, test2
-Automation: automated
-Component: Pipelines
+Tags: e2e, integration, pipelines, test, to-do
+Component: Triggers
 CasePositiveOrNegative: positive
 Level: Integration
 Type: Functional
@@ -32,7 +31,6 @@ Steps:
 
 ## Conditional pipeline run: P-01-TC02
 Tags: e2e, integration, pipelines
-Automation: automated
 Component: Pipelines
 CasePositiveOrNegative: positive
 Level: Integration
@@ -53,7 +51,6 @@ Steps:
 
 ## Conditional pipeline runs without optional resources: P-01-TC03
 Tags: e2e, integration, pipelines
-Automation: automated
 Component: Pipelines
 CasePositiveOrNegative: positive
 Level: Integration
@@ -74,7 +71,6 @@ Steps:
 
 ## Pipelinerun Timeout failure Test: P-01-TC04
 Tags: e2e, integration, pipelines
-Automation: automated
 Component: Pipelines
 CasePositiveOrNegative: positive
 Level: Integration
@@ -94,7 +90,6 @@ Steps:
 
 ## Configure execution results at the Task level Test: P-01-TC05
 Tags: e2e, integration, pipelines
-Automation: automated
 Component: Pipelines
 CasePositiveOrNegative: positive
 Level: Integration
@@ -114,7 +109,6 @@ Steps:
 
 ## Cancel pipelinerun Test: P-01-TC06
 Tags: e2e, integration, pipelines
-Automation: automated
 Component: Pipelines
 CasePositiveOrNegative: positive
 Level: Integration
@@ -134,7 +128,6 @@ Steps:
 
 ## Pipelinerun with pipelinespec and taskspec(embedded pipelinerun tests): P-01-TC07
 Tags: e2e, integration, pipelines
-Automation: automated
 Component: Pipelines
 CasePositiveOrNegative: positive
 Level: Integration
