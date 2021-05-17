@@ -18,7 +18,7 @@ parser.add_argument('--path_to_xml_report', type=str, help='path to xml report',
                     required=True)
 parser.add_argument('--testrun-template-id', type=str, help='testrun template id', required=True)
 parser.add_argument('--build_number', type=str, help='build number of the operator', required=True)
-parser.add_argument('--milestone_id', type=str, help='Milestone ID of the release plan', required=True)
+# parser.add_argument('--milestone_id', type=str, help='Milestone ID of the release plan', required=True)
 parser.add_argument('--testrun_name_prefix', type=str, help='testrun name prefix', required=True)
 location = '/home/varadhya/workspace/src/github.com/release-tests/reports/xml-report/result.xml'
 
@@ -28,7 +28,7 @@ xml_report_location = args.path_to_xml_report
 build_number = args.build_number
 testrun_template_id = args.testrun_template_id
 testrun_name_prefix = args.testrun_name_prefix
-milestone_id = args.milestone_id
+# milestone_id = args.milestone_id
 
 tree = ET.parse(location)
 test_suites = tree.getroot()
@@ -60,13 +60,15 @@ else:
 # Create/Get testrun
 try:
     tr = TestRun(project_id=project_id, test_run_id=test_run_id)
+    print('Getting testrun {}'.format(test_run_id), flush=True)
 except PylarionLibException:
+    print('Creating testrun {}'.format(test_run_id), flush=True)
     tr = TestRun.create(project_id=project_id, test_run_id=test_run_id, template=testrun_template_id)
 
 # mark testrun status to in progress
 tr.status = 'inprogress'
 tr.build = build_number
-tr.plannedin = milestone_id
+# tr.plannedin = milestone_id
 # tr.update()
 
 for test_suite in test_suites:
@@ -81,10 +83,10 @@ for test_suite in test_suites:
                     if len(item) > 0:
                         test_record.comment = item[0].attrib['message']
                         test_record.result = 'failed'
-                        print('{}: failed'.format(test_id), flush=True)
+                        print('Updating result of {} as failed'.format(test_id), flush=True)
                     else:
                         test_record.result = 'passed'
-                        print('{}: passed'.format(test_id), flush=True)
+                        print('Updating result of {} as passed'.format(test_id), flush=True)
                     tr.update_test_record_by_object(test_case_id=test_id, test_record=test_record)
                 except PylarionLibException:
                     print('Test case {} not found'.format(test_id), flush=True)
