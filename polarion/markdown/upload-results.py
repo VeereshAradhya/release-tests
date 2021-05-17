@@ -54,7 +54,7 @@ else:
     try:
         compiled_testcase_id = re.compile(r'{}'.format(testcase_regex))
     except re.error as e:
-        print('Invalid value for testcase_regex in config.yaml')
+        print('Invalid value for testcase_regex in config.yaml', flush=True)
         raise Exception
 
 # Create/Get testrun
@@ -81,10 +81,10 @@ for test_suite in test_suites:
                     if len(item) > 0:
                         test_record.comment = item[0].attrib['message']
                         test_record.result = 'failed'
-                        print('{}: failed'.format(test_id))
+                        print('{}: failed'.format(test_id), flush=True)
                     else:
                         test_record.result = 'passed'
-                        print('{}: passed'.format(test_id))
+                        print('{}: passed'.format(test_id), flush=True)
                     tr.update_test_record_by_object(test_case_id=test_id, test_record=test_record)
                 except PylarionLibException:
-                    print('Test case {} not found'.format(test_id))
+                    print('Test case {} not found'.format(test_id), flush=True)

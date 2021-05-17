@@ -28,7 +28,7 @@ with open('config.yaml') as f:
     try:
         config = yaml.safe_load(f)
     except yaml.YAMLError as e:
-        print(e)
+        print(e, flush=True)
         raise Exception
 
 # set project_id and test_id
@@ -43,7 +43,7 @@ else:
     try:
         compiled_testcase_id = re.compile(r'{}'.format(testcase_regex))
     except re.error as e:
-        print('Invalid value for testcase_regex in config.yaml')
+        print('Invalid value for testcase_regex in config.yaml', flush=True)
         raise Exception
 
 field_name_api_regex = config['field_name_api_regex']
@@ -103,11 +103,11 @@ def create_or_update_test(test_case):
             t = TestCase(project_id=project_id, work_item_id=test_id)
             for item in test_properties:
                 setattr(t, item, test_properties[item])
-            print('Updating test case {}'.format(test_id))
+            print('Updating test case {}'.format(test_id), flush=True)
             t.update()
         except PylarionLibException:
             t = TestCase(project_id=project_id)
-            print('Creating test case {}'.format(test_id))
+            print('Creating test case {}'.format(test_id), flush=True)
             t.create(project_id=project_id, work_item_id=test_id, **test_properties)
 
 
