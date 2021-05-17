@@ -1,11 +1,15 @@
 import xml.etree.ElementTree as ET
 import re
 
-from pylero.exceptions import PyleroLibException
-from pylero.test_record import TestRecord
-from pylero.test_run import TestRun
+from pylarion.exceptions import PylarionLibException
+from pylarion.test_record import TestRecord
+from pylarion.test_run import TestRun
 import argparse
 import yaml
+import ssl
+
+# fix to certificate issue
+ssl._create_default_https_context = ssl._create_unverified_context
 
 # project_id = 'VAradhyaExerciseAug30'
 parser = argparse.ArgumentParser()
@@ -56,7 +60,7 @@ else:
 # Create/Get testrun
 try:
     tr = TestRun(project_id=project_id, test_run_id=test_run_id)
-except PyleroLibException:
+except PylarionLibException:
     tr = TestRun.create(project_id=project_id, test_run_id=test_run_id, template=testrun_template_id)
 
 # mark testrun status to in progress
@@ -82,5 +86,5 @@ for test_suite in test_suites:
                         test_record.result = 'passed'
                         print('{}: passed'.format(test_id))
                     tr.update_test_record_by_object(test_case_id=test_id, test_record=test_record)
-                except PyleroLibException:
+                except PylarionLibException:
                     print('Test case {} not found'.format(test_id))
