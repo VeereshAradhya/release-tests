@@ -20,7 +20,6 @@ parser.add_argument('--testrun-template-id', type=str, help='testrun template id
 parser.add_argument('--build_number', type=str, help='build number of the operator', required=True)
 # parser.add_argument('--milestone_id', type=str, help='Milestone ID of the release plan', required=True)
 parser.add_argument('--testrun_name_prefix', type=str, help='testrun name prefix', required=True)
-location = '/home/varadhya/workspace/src/github.com/release-tests/reports/xml-report/result.xml'
 
 args = parser.parse_args()
 
@@ -30,7 +29,7 @@ testrun_template_id = args.testrun_template_id
 testrun_name_prefix = args.testrun_name_prefix
 # milestone_id = args.milestone_id
 
-tree = ET.parse(location)
+tree = ET.parse(xml_report_location)
 test_suites = tree.getroot()
 test_run_id = '{}-{}'.format(testrun_name_prefix, build_number)
 
