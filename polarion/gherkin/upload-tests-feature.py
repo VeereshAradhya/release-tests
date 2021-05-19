@@ -5,7 +5,10 @@ from prettytable import PrettyTable
 from utility import create_or_update_test
 import yaml
 import argparse
+import ssl
 
+# fix to certificate issue
+ssl._create_default_https_context = ssl._create_unverified_context
 parser = argparse.ArgumentParser()
 
 parser.add_argument('--file_path', type=str, help='path to the folder which contains test files',
