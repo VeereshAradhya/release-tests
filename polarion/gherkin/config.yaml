@@ -1,0 +1,46 @@
+project_id: 'VAradhyaExerciseAug30'
+testcase_regex: '.+:\s*(P-\d+-TC\d+)'
+defaults:
+  - field_name_ui: Component
+    value: ui
+    field_name_api: casecomponent
+  - field_name_ui: Level
+    value: integration
+    field_name_api: caselevel
+field_name_api_regex:
+  - field_name_ui: Subcomponent
+    regex: 'Subcomponent: (.+)'
+    field_name_api: subcomponent
+  - field_name_ui: CustomerScenario
+    regex: 'CustomerScenario: (.+)'
+    field_name_api: customerscenario
+  - field_name_ui: Multi-ProductCustomerScenario
+    regex: 'Multi-ProductCustomerScenario: (.+)'
+    field_name_api: multiproduct
+  - field_name_ui: Type
+    regex: 'Type: (.+)'
+    field_name_api: testtype
+  - field_name_ui: Subtype1
+    regex: 'Subtype1: (.+)'
+    field_name_api: subtype1
+  - field_name_ui: Subtype2
+    regex: 'Subtype2: (.+)'
+    field_name_api: subtype2
+  - field_name_ui: LegacyTestCase
+    regex: 'LegacyTestCase: (.+)'
+    field_name_api: legacytest
+  - field_name_ui: Pos/Neg
+    regex: 'Pos/Neg: (.+)'
+    field_name_api: caseposneg
+  - field_name_ui: Importance
+    regex: 'Importance: (.+)'
+    field_name_api: caseimportance
+  - field_name_ui: Upstream
+    regex: 'Upstream: (.+)'
+    field_name_api: upstream
+  - field_name_ui: CasePositiveOrNegative
+    regex: 'CasePositiveOrNegative: (.+)'
+    field_name_api: caseposneg
+  - field_name_ui: Tags
+    regex: 'Tags: (.+)'
+    field_name_api: tags
