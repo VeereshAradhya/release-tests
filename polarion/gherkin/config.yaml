@@ -1,9 +1,6 @@
 project_id: 'VAradhyaExerciseAug30'
-testcase_regex: '.+:\s*(P-\d+-TC\d+)'
+testcase_regex: '(P-\d+-TC\d+)'
 defaults:
-  - field_name_ui: Component
-    value: ui
-    field_name_api: casecomponent
   - field_name_ui: Level
     value: integration
     field_name_api: caselevel
