@@ -54,8 +54,8 @@ def create_or_update_tests(file_path):
         if tc_id:
             tc_id = tc_id.groups()[0]
             test_properties = {}
-            test_properties['casecomponent'] = os.environ.get('COMPONENT').lower()
-            test_properties['subcomponent'] = (content['feature']['tags'][0]['name'].replace('@', '')).lower()
+            # test_properties['casecomponent'] = os.environ.get('COMPONENT').lower()
+            test_properties['casecomponent'] = (content['feature']['tags'][0]['name'].replace('@', '')).lower()
             test_properties['tags'] = ','.join(map(lambda x: x['name'], children['scenario']['tags']))
             if '@to-do' in test_properties['tags']:
                 test_properties['caseautomation'] = 'notautomated'
