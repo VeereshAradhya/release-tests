@@ -56,7 +56,7 @@ def create_or_update_tests(file_path):
             test_properties = {}
             # test_properties['casecomponent'] = os.environ.get('COMPONENT').lower()
             if content['feature']['tags']:
-                test_properties['casecomponent'] = content['feature']['tags'][0]['name'].replace('@', '')
+                test_properties['casecomponent'] = (content['feature']['tags'][0]['name'].replace('@', '')).lower()
             else:
                 test_properties['casecomponent'] = 'devconsole'
             test_properties['tags'] = ','.join(map(lambda x: x['name'], children['scenario']['tags']))
