@@ -161,6 +161,18 @@ Steps:
     |S.NO|pipeline_run_name  |status     |check_lable_propagation|
     |----|-------------------|-----------|-----------------------|
     |1   |simple-pipeline-run|successfull|no                     |
+  * Create
+    |S.NO|resource_dir                                                          |
+    |----|----------------------------------------------------------------------|
+    |1   |testdata/triggers/triggertemplate/triggertemplate-2.yaml              |
+    |2   |testdata/triggers/eventlisteners/eventlistener-embeded-binding-2.yaml |
+  * Expose Event listener for TLS "listener-embed-binding-2"
+  * Mock post event to "github" interceptor with event-type "push", payload "testdata/push.json", with TLS "true"
+  * Assert eventlistener response
+  * Verify pipelinerun
+    |S.NO|pipeline_run_name    |status     |check_lable_propagation|
+    |----|---------------------|-----------|-----------------------|
+    |1   |simple-pipeline-run-2|successfull|no                     |
   * Cleanup Triggers
 
 ## Create Eventlistener embedded TriggersBindings specs: PIPELINES-05-TC08
