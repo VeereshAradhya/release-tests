@@ -155,12 +155,6 @@ Steps:
     |3   |testdata/triggers/triggertemplate/triggertemplate.yaml              |
     |4   |testdata/triggers/eventlisteners/eventlistener-embeded-binding.yaml |
   * Expose Event listener for TLS "listener-embed-binding"
-  * Mock post event to "github" interceptor with event-type "push", payload "testdata/push.json", with TLS "true"
-  * Assert eventlistener response
-  * Verify pipelinerun
-    |S.NO|pipeline_run_name  |status     |check_lable_propagation|
-    |----|-------------------|-----------|-----------------------|
-    |1   |simple-pipeline-run|successfull|no                     |
   * Create
     |S.NO|resource_dir                                                          |
     |----|----------------------------------------------------------------------|
