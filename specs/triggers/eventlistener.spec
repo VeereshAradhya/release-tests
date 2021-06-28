@@ -154,7 +154,6 @@ Steps:
     |2   |testdata/triggers/triggerbindings/triggerbinding.yaml               |
     |3   |testdata/triggers/triggertemplate/triggertemplate.yaml              |
     |4   |testdata/triggers/eventlisteners/eventlistener-embeded-binding.yaml |
-  * Expose Event listener for TLS "listener-embed-binding"
   * Create
     |S.NO|resource_dir                                                          |
     |----|----------------------------------------------------------------------|
