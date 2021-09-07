@@ -62,7 +62,7 @@ def create_or_update_tests(file_path):
             test_properties['tags'] = ','.join(map(lambda x: x['name'], children['scenario']['tags']))
             if '@to-do' in test_properties['tags']:
                 test_properties['caseautomation'] = 'notautomated'
-            elif '@manual' in test_properties['tags']:
+            elif '@manual' in test_properties['tags'] or '@broken-test' in test_properties['tags']:
                 test_properties['caseautomation'] = 'manualonly'
             else:
                 test_properties['caseautomation'] = 'automated'
