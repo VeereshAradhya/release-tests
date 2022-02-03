@@ -1,0 +1,5 @@
+git+https://github.com/RedHatQE/pylero.git@main
+pyyaml 
+gherkin-official
+prettytable
+mistune==2.0.0rc1
