@@ -1,5 +1,5 @@
-from pylarion.work_item import TestCase
-from pylarion.exceptions import PylarionLibException
+from pylero.work_item import TestCase
+from pylero.exceptions import PylarionLibException
 
 
 def create_or_update_test(project_id, test_id, test_properties):
