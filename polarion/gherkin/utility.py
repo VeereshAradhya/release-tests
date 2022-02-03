@@ -1,3 +1,9 @@
+import ssl
+
+# fix to certificate issue
+ssl._create_default_https_context = ssl._create_unverified_context
+
+
 from pylero.work_item import TestCase
 from pylero.exceptions import PylarionLibException
 
