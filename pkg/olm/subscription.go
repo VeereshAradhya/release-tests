@@ -24,7 +24,7 @@ const (
 	Interval = 10 * time.Second
 	// Timeout specifies the timeout for the function PollImmediate to reach a certain status.
 	Timeout            = 8 * time.Minute
-	OperatorsNamespace = "openshift-operators"
+	OperatorsNamespace = "test-osp-installation"
 	OLMNamespace       = "openshift-marketplace"
 )
 
