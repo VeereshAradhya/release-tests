@@ -1,0 +1,12 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: echo-task
+spec:
+  params:
+    - name: message
+  steps:
+    - name: echo-step
+      image: registry.redhat.io/ubi7/ubi-minimal
+      script: |
+        echo "$(params.message)"
