@@ -7,9 +7,6 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/tektoncd/cli/pkg/cli"
-	clitr "github.com/tektoncd/cli/pkg/cmd/taskrun"
-	"github.com/tektoncd/cli/pkg/options"
 	"github.com/getgauge-contrib/gauge-go/gauge"
 	"github.com/getgauge-contrib/gauge-go/testsuit"
 	"github.com/openshift-pipelines/release-tests/pkg/clients"
