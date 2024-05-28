@@ -9,7 +9,7 @@ Tags: e2e, linux/amd64, clustertasks, non-admin, jib-maven, sanity
 Component: Pipelines
 Level: Integration
 Type: Functional
-Importance: Critical
+Importance: Criticall
 
 Steps:
   * Verify ServiceAccount "pipeline" exist
