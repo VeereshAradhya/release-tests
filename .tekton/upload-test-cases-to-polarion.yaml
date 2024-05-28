@@ -7,6 +7,10 @@ metadata:
     pipelinesascode.tekton.dev/on-cel-expression: |
       "specs/*.spec".pathChanged() && event == "push" && target_branch == "test-pac-remote"
     pipelinesascode.tekton.dev/max-keep-runs: "5"
+    pipelinesascode.tekton.dev/task: "git-clone"
+
+    # Use golangci-lint from the hub to test our Golang project
+    pipelinesascode.tekton.dev/task-1: "golangci-lint"
 spec:
   params:
     # The variable with brackets are special to Pipelines as Code
