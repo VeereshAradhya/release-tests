@@ -4,89 +4,52 @@ kind: PipelineRun
 metadata:
   name: upload-test-cases-polarion-
   annotations:
-    pipelinesascode.tekton.dev/on-target-branch: "[master]"
     pipelinesascode.tekton.dev/on-cel-expression: |
-      "specs".pathChanged() && event == "push"
+      "specs".pathChanged() && event == "push" && target_branch == "test-pac-remote"
     pipelinesascode.tekton.dev/max-keep-runs: "5"
 spec:
+  params:
+    # The variable with brackets are special to Pipelines as Code
+    # They will automatically be expanded with the events from Github.
+    - name: repo_url
+      value: "{{ repo_url }}"
+    - name: revision
+      value: "{{ revision }}"
   pipelineSpec:
     params:
-      - name: RELEASE_TESTS_BRANCH
-        default: master
+      - name: repo_url
+      - name: revision
     workspaces:
-      - name: git
+      - name: source
+      - name: basic-auth
     tasks:
-      - name: clone-release-tests-repo
-        params:
-          - name: url
-            value: 'https://github.com/openshift-pipelines/release-tests.git'
-          - name: revision
-            value: $(params.RELEASE_TESTS_BRANCH)
+      - name: fetch-repository
         taskRef:
-          kind: ClusterTask
           name: git-clone
         workspaces:
           - name: output
-            subPath: release-tests-git
-            workspace: git
-      - name: clone-plumbing-repo
+            workspace: source
+          - name: basic-auth
+            workspace: basic-auth
         params:
           - name: url
-            value: 'https://gitlab.cee.redhat.com/tekton/plumbing.git'
+            value: $(params.repo_url)
           - name: revision
-            value: master
-          - name: sslVerify
-            value: 'false'
+            value: $(params.revision)
+      - name: golangci-lint
         taskRef:
-          kind: ClusterTask
-          name: git-clone
-        workspaces:
-          - name: output
-            subPath: plumbing-git
-            workspace: git
-      - name: upload-tests-to-polarion
-        taskRef:
-          resolver: cluster
-          params: 
-          - name: kind
-            value: task
-          - name: name
-            value: upload-test-cases-to-polarion
-          - name: namespace
-            value: pipelines-ci
-        params:
-        - name: RELEASE_TESTS_BRANCH
-          value: $(params.RELEASE_TESTS_BRANCH)
+          name: golangci-lint
         runAfter:
-          - clone-plumbing-repo
-          - clone-release-tests-repo
-        workspaces:
-          - name: release-tests-git
-            subPath: release-tests-git
-            workspace: git
-          - name: plumbing-git
-            subPath: plumbing-git
-            workspace: git
-    finally:
-      - name: send-slack-notification
-        taskRef:
-          resolver: cluster
-          params: 
-          - name: kind
-            value: task
-          - name: name
-            value: send-slack-notification
-          - name: namespace
-            value: pipelines-ci
+          - fetch-repository
         params:
-          - name: MESSAGE
-            value: "<icon> Uploading test cases to Polario *<run_status>* <icon> <<logs_url>|logs>"
-        when:
-          - input: $(tasks.upload-tests-to-polarion.status)
-            operator: in
-            values: ["Failed", "None"]
+          - name: package
+            value: .
+        workspaces:
+          - name: source
+            workspace: source
+
   workspaces:
-    - name: git
+    - name: source
       volumeClaimTemplate:
         spec:
           accessModes:
@@ -94,6 +57,8 @@ spec:
           resources:
             requests:
               storage: 1Gi
+    # This workspace will inject secret to help the git-clone task to be able to
+    # checkout the private repositories
     - name: basic-auth
       secret:
         secretName: "{{ git_auth_secret }}"
