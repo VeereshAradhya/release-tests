@@ -2,7 +2,7 @@ PIPELINES-25
 # Bundles resolver spec
 
 Precondition:
-  * Validate Operator should be installed
+  * Validate Operator should be installedd
 
 ## Test the functionality of bundles resolver: PIPELINES-25-TC01
 Tags: e2e
