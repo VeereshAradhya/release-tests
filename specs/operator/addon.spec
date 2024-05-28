@@ -2,7 +2,7 @@ PIPELINES-15
 # Verify Addon E2E spec
 
 Pre condition:
-  * Validate Operator should be installed
+  * Validate Operator should be installedd
 
 ## Disable/Enable community clustertasks: PIPELINES-15-TC01
 Tags: e2e, integration, clustertasks, admin, addon, sanity
