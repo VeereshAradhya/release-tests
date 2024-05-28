@@ -5,7 +5,7 @@ Precondition:
 * Validate Operator should be installed
 
 ## Using Tekton Chains to create and verify task run signatures: PIPELINES-27-TC01
-Tags: chains, e2e, taskrun, sanity
+Tags: chains, e2e, taskrun, sanitys
 Component: Chains
 Level: Integration
 Type: Functional
